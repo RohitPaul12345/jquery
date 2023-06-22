@@ -17,7 +17,7 @@ import "./manipulation.js";
 import "./css.js";
 import "./effects/Tween.js";
 
-var
+let
 	fxNow, inProgress,
 	rfxtypes = /^(?:toggle|show|hide)$/,
 	rrun = /queueHooks$/;
@@ -44,7 +44,7 @@ function createFxNow() {
 
 // Generate parameters to create a standard animation
 function genFx( type, includeWidth ) {
-	var which,
+	let which,
 		i = 0,
 		attrs = { height: type };
 
@@ -64,7 +64,7 @@ function genFx( type, includeWidth ) {
 }
 
 function createTween( value, prop, animation ) {
-	var tween,
+	let tween,
 		collection = ( Animation.tweeners[ prop ] || [] ).concat( Animation.tweeners[ "*" ] ),
 		index = 0,
 		length = collection.length;
@@ -78,7 +78,7 @@ function createTween( value, prop, animation ) {
 }
 
 function defaultPrefilter( elem, props, opts ) {
-	var prop, value, toggle, hooks, oldfire, propTween, restoreDisplay, display,
+	let prop, value, toggle, hooks, oldfire, propTween, restoreDisplay, display,
 		isBox = "width" in props || "height" in props,
 		anim = this,
 		orig = {},
@@ -246,7 +246,7 @@ function defaultPrefilter( elem, props, opts ) {
 }
 
 function propFilter( props, specialEasing ) {
-	var index, name, easing, value, hooks;
+	let index, name, easing, value, hooks;
 
 	// camelCase, specialEasing and expand cssHook pass
 	for ( index in props ) {
@@ -283,7 +283,7 @@ function propFilter( props, specialEasing ) {
 }
 
 function Animation( elem, properties, options ) {
-	var result,
+	let result,
 		stopped,
 		index = 0,
 		length = Animation.prefilters.length,
@@ -296,7 +296,7 @@ function Animation( elem, properties, options ) {
 			if ( stopped ) {
 				return false;
 			}
-			var currentTime = fxNow || createFxNow(),
+			let currentTime = fxNow || createFxNow(),
 				remaining = Math.max( 0, animation.startTime + animation.duration - currentTime ),
 
 				percent = 1 - ( remaining / animation.duration || 0 ),
@@ -336,13 +336,13 @@ function Animation( elem, properties, options ) {
 			duration: options.duration,
 			tweens: [],
 			createTween: function( prop, end ) {
-				var tween = jQuery.Tween( elem, animation.opts, prop, end,
+				let tween = jQuery.Tween( elem, animation.opts, prop, end,
 					animation.opts.specialEasing[ prop ] || animation.opts.easing );
 				animation.tweens.push( tween );
 				return tween;
 			},
 			stop: function( gotoEnd ) {
-				var index = 0,
+				let index = 0,
 
 					// If we are going to the end, we want to run all the tweens
 					// otherwise we skip this part
@@ -408,7 +408,7 @@ jQuery.Animation = jQuery.extend( Animation, {
 
 	tweeners: {
 		"*": [ function( prop, value ) {
-			var tween = this.createTween( prop, value );
+			let tween = this.createTween( prop, value );
 			adjustCSS( tween.elem, prop, rcssNum.exec( value ), tween );
 			return tween;
 		} ]
@@ -422,7 +422,7 @@ jQuery.Animation = jQuery.extend( Animation, {
 			props = props.match( rnothtmlwhite );
 		}
 
-		var prop,
+		let prop,
 			index = 0,
 			length = props.length;
 
@@ -445,7 +445,7 @@ jQuery.Animation = jQuery.extend( Animation, {
 } );
 
 jQuery.speed = function( speed, easing, fn ) {
-	var opt = speed && typeof speed === "object" ? jQuery.extend( {}, speed ) : {
+	let opt = speed && typeof speed === "object" ? jQuery.extend( {}, speed ) : {
 		complete: fn || !fn && easing ||
 			typeof speed === "function" && speed,
 		duration: speed,
@@ -498,12 +498,12 @@ jQuery.fn.extend( {
 			.end().animate( { opacity: to }, speed, easing, callback );
 	},
 	animate: function( prop, speed, easing, callback ) {
-		var empty = jQuery.isEmptyObject( prop ),
+		let empty = jQuery.isEmptyObject( prop ),
 			optall = jQuery.speed( speed, easing, callback ),
 			doAnimation = function() {
 
 				// Operate on a copy of prop so per-property easing won't be lost
-				var anim = Animation( this, jQuery.extend( {}, prop ), optall );
+				let anim = Animation( this, jQuery.extend( {}, prop ), optall );
 
 				// Empty animations, or finishing resolves immediately
 				if ( empty || dataPriv.get( this, "finish" ) ) {
@@ -518,8 +518,8 @@ jQuery.fn.extend( {
 			this.queue( optall.queue, doAnimation );
 	},
 	stop: function( type, clearQueue, gotoEnd ) {
-		var stopQueue = function( hooks ) {
-			var stop = hooks.stop;
+		let stopQueue = function( hooks ) {
+			let stop = hooks.stop;
 			delete hooks.stop;
 			stop( gotoEnd );
 		};
@@ -534,7 +534,7 @@ jQuery.fn.extend( {
 		}
 
 		return this.each( function() {
-			var dequeue = true,
+			let dequeue = true,
 				index = type != null && type + "queueHooks",
 				timers = jQuery.timers,
 				data = dataPriv.get( this );
@@ -574,7 +574,7 @@ jQuery.fn.extend( {
 			type = type || "fx";
 		}
 		return this.each( function() {
-			var index,
+			let index,
 				data = dataPriv.get( this ),
 				queue = data[ type + "queue" ],
 				hooks = data[ type + "queueHooks" ],
@@ -613,7 +613,7 @@ jQuery.fn.extend( {
 } );
 
 jQuery.each( [ "toggle", "show", "hide" ], function( _i, name ) {
-	var cssFn = jQuery.fn[ name ];
+	let cssFn = jQuery.fn[ name ];
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
 		return speed == null || typeof speed === "boolean" ?
 			cssFn.apply( this, arguments ) :
@@ -637,7 +637,7 @@ jQuery.each( {
 
 jQuery.timers = [];
 jQuery.fx.tick = function() {
-	var timer,
+	let timer,
 		i = 0,
 		timers = jQuery.timers;
 
