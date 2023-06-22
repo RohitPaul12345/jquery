@@ -19,7 +19,7 @@ import "./core/init.js";
 import "./core/ready.js";
 import "./selector.js"; // contains
 
-var
+let
 
 	// Swappable if display is none or starts with table
 	// except "table", "table-cell", or "table-caption"
@@ -35,7 +35,7 @@ function setPositiveNumber( _elem, value, subtract ) {
 
 	// Any relative (+/-) values have already been
 	// normalized at this point
-	var matches = rcssNum.exec( value );
+	let matches = rcssNum.exec( value );
 	return matches ?
 
 		// Guard against undefined "subtract", e.g., when used as in cssHooks
@@ -44,7 +44,7 @@ function setPositiveNumber( _elem, value, subtract ) {
 }
 
 function boxModelAdjustment( elem, dimension, box, isBorderBox, styles, computedVal ) {
-	var i = dimension === "width" ? 1 : 0,
+	let i = dimension === "width" ? 1 : 0,
 		extra = 0,
 		delta = 0,
 		marginDelta = 0;
@@ -117,7 +117,7 @@ function boxModelAdjustment( elem, dimension, box, isBorderBox, styles, computed
 function getWidthOrHeight( elem, dimension, extra ) {
 
 	// Start with computed style
-	var styles = getStyles( elem ),
+	let styles = getStyles( elem ),
 
 		// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-4322).
 		// Fake content-box until we know it's needed to know the true value.
@@ -204,7 +204,7 @@ jQuery.extend( {
 		}
 
 		// Make sure that we're working with the right name
-		var ret, type, hooks,
+		let ret, type, hooks,
 			origName = cssCamelCase( name ),
 			isCustomProp = rcustomProp.test( name ),
 			style = elem.style;
@@ -273,7 +273,7 @@ jQuery.extend( {
 	},
 
 	css: function( elem, name, extra, styles ) {
-		var val, num, hooks,
+		let val, num, hooks,
 			origName = cssCamelCase( name ),
 			isCustomProp = rcustomProp.test( name );
 
@@ -336,7 +336,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 		},
 
 		set: function( elem, value, extra ) {
-			var matches,
+			let matches,
 				styles = getStyles( elem ),
 
 				// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-3991)
@@ -373,7 +373,7 @@ jQuery.each( {
 }, function( prefix, suffix ) {
 	jQuery.cssHooks[ prefix + suffix ] = {
 		expand: function( value ) {
-			var i = 0,
+			let i = 0,
 				expanded = {},
 
 				// Assumes a single number if not a string
@@ -396,7 +396,7 @@ jQuery.each( {
 jQuery.fn.extend( {
 	css: function( name, value ) {
 		return access( this, function( elem, name, value ) {
-			var styles, len,
+			let styles, len,
 				map = {},
 				i = 0;
 
