@@ -2,7 +2,7 @@
 ( function() {
 	/* global loadTests: false */
 
-	var dynamicImportSource, config, src,
+	let dynamicImportSource, config, src,
 		FILEPATH = "/test/jquery.js",
 		activeScript = [].slice.call( document.getElementsByTagName( "script" ), -1 )[ 0 ],
 		parentUrl = activeScript && activeScript.src ?
@@ -12,7 +12,7 @@
 		require = window.require;
 
 	function getQUnitConfig() {
-		var config = Object.create( null );
+		let config = Object.create( null );
 
 		// Default to unminified jQuery for directly-opened iframes
 		if ( !QUnit ) {
