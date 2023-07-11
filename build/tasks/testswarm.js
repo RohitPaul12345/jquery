@@ -3,7 +3,7 @@
 module.exports = function( grunt ) {
 	grunt.registerTask( "testswarm", function( commit, configFile, projectName, browserSets,
 			timeout, testMode ) {
-		var jobName, config, tests,
+		let jobName, config, tests,
 			testswarm = require( "testswarm" ),
 			runs = {},
 			done = this.async(),
