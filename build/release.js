@@ -1,6 +1,6 @@
 "use strict";
 
-var fs = require( "fs" );
+let fs = require( "fs" );
 
 module.exports = function( Release ) {
 
@@ -28,7 +28,7 @@ module.exports = function( Release ) {
 	const npmTags = Release.npmTags;
 
 	function setSrcVersion( filepath ) {
-		var contents = fs.readFileSync( filepath, "utf8" );
+		let contents = fs.readFileSync( filepath, "utf8" );
 		contents = contents.replace( /@VERSION/g, Release.newVersion );
 		fs.writeFileSync( filepath, contents, "utf8" );
 	}
